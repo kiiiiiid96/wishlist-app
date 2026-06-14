@@ -9,8 +9,8 @@ def get_db():
     return conn
 
 def init_db():
-    if not os.path.exists(DATABASE):
-        conn = get_db()
+   if not os.path.exists(DATABASE):
+    conn = get_db()   
         conn.execute('''
             CREATE TABLE wishes (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
