@@ -9,22 +9,20 @@ def get_db():
     return conn
 
 def init_db():
-   if not os.path.exists(DATABASE):
-    conn = get_db()   
-        conn.execute('''
-            CREATE TABLE wishes (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                price REAL NOT NULL,
-                link TEXT,
-                status TEXT CHECK(status IN ('pending', 'completed')) DEFAULT 'pending'
-            )
-        ''')
-        conn.commit()
-        # Демо-данные (цены в рублях)
-        conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                     ('Alan Wake 2', 12000.0, 'https://example.com', 'pending'))
-        conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                     ('Halloween: The game', 3500.0, '', 'completed'))
-        conn.commit()
-        conn.close()
+    conn = get_db()
+    conn.execute('DROP TABLE IF EXISTS wishes')
+    conn.execute('''
+        CREATE TABLE wishes (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            price REAL NOT NULL,
+            link TEXT,
+            status TEXT CHECK(status IN ('pending', 'completed')) DEFAULT 'pending'
+        )
+    ''')
+    conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
+                 ('Наушники Sony', 12000, '', 'pending'))
+    conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
+                 ('Книга Flask', 3500, '', 'completed'))
+    conn.commit()
+    conn.close()
