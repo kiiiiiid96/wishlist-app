@@ -21,10 +21,10 @@ def init_db():
             )
         ''')
         conn.commit()
-        # Демо-данные
+        # Демо-данные (цены в рублях)
         conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                     ('Наушники Sony', 120.0, 'https://example.com', 'pending'))
+                     ('Наушники Sony', 12000.0, 'https://example.com', 'pending'))
         conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                     ('Книга по Flask', 35.0, '', 'completed'))
+                     ('Книга по Flask', 3500.0, '', 'completed'))
         conn.commit()
         conn.close()
