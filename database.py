@@ -9,8 +9,12 @@ def get_db():
     return conn
 
 def init_db():
+    # ↓↓↓ ЭТИ ДВЕ СТРОЧКИ УДАЛЯЮТ СТАРУЮ БАЗУ ДАННЫХ ↓↓↓
+    if os.path.exists(DATABASE):
+        os.remove(DATABASE)
+    # ↑↑↑ ЭТИ ДВЕ СТРОЧКИ УДАЛЯЮТ СТАРУЮ БАЗУ ДАННЫХ ↑↑↑
+    
     conn = get_db()
-    conn.execute('DROP TABLE IF EXISTS wishes')
     conn.execute('''
         CREATE TABLE wishes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -20,9 +24,10 @@ def init_db():
             status TEXT CHECK(status IN ('pending', 'completed')) DEFAULT 'pending'
         )
     ''')
-    conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
-                 ('Alan Wake 2', 12000, '', 'pending'))
-    conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
-                 ('Resident Evil Requiem', 3500, '', 'completed'))
+    # Демо-данные в рублях
+    conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
+                 ('Наушники Sony', 12000.0, 'https://example.com', 'pending'))
+    conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
+                 ('Книга по Flask', 3500.0, '', 'completed'))
     conn.commit()
     conn.close()
