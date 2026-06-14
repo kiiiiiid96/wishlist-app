@@ -2,42 +2,46 @@
 
 {% block content %}
 
-<p><strong>💰 Осталось потратить:</strong> {{ total }} ₽</p>
+<h2>🎁 Wishlist</h2>
 
-<div>
-    Сортировка:
-    <a href="/?sort=name">По имени</a> |
-    <a href="/?sort=price">По цене</a> |
-    <a href="/?sort=status">По статусу</a>
-</div>
+<p><strong>💰 Осталось потратить: {{ total }} руб.</strong></p>
 
-<table border="1">
-    <thead>
-        <tr>
-            <th>Название</th>
-            <th>Цена (₽)</th>
-            <th>Статус</th>
-            <th>Действия</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for w in wishes %}
-        <tr class="{% if w.status == 'completed' %}completed{% endif %}">
-            <td>{{ w.name }}</td>
-            <td>{{ w.price }} ₽</td>
-            <td>{{ '✅ Выполнено' if w.status == 'completed' else '⏳ В ожидании' }}</td>
-            <td>
-                <a href="/toggle/{{ w.id }}">🔄 Переключить</a> |
-                <a href="/edit/{{ w.id }}">✏️</a> |
-                <a href="/delete/{{ w.id }}" onclick="return confirm('Удалить?')">❌</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+<p>
+    <a href="/?sort=name">Сортировать по имени</a> |
+    <a href="/?sort=price">Сортировать по цене</a> |
+    <a href="/?sort=status">Сортировать по статусу</a>
+</p>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Название</th>
+        <th>Цена (руб)</th>
+        <th>Статус</th>
+        <th>Действия</th>
+    </tr>
+    {% for w in wishes %}
+    <tr>
+        <td>{{ w.name }}</td>
+        <td>{{ w.price }} руб.</td>
+        <td>{% if w.status == 'completed' %}✅ Выполнено{% else %}⏳ В ожидании{% endif %}</td>
+        <td>
+            <a href="/toggle/{{ w.id }}">Переключить</a> |
+            <a href="/edit/{{ w.id }}">Изменить</a> |
+            <a href="/delete/{{ w.id }}" onclick="return confirm('Точно удалить?')">Удалить</a>
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 
+<form action="/search" method="get">
+    <input type="text" name="q" placeholder="Поиск...">
+    <button type="submit">Найти</button>
+</form>
+
 {% if search_query %}
-<p>Результаты поиска: "{{ search_query }}"</p>
+    <p>Результаты поиска: "{{ search_query }}"</p>
 {% endif %}
+
+<a href="/add">➕ Добавить желание</a>
 
 {% endblock %}
