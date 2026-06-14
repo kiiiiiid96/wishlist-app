@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-<p><strong>💰 Осталось потратить:</strong> {{ total }} ₽</p>
-<div>
+<p><strong>💰Осталось потратить:</strong> {{ total }} ₽</p>
+<th>Цена (₽)</th>
+<td>{{ w.price }} ₽</td>
     Сортировка:
     <a href="/?sort=name">По имени</a> |
     <a href="/?sort=price">По цене</a> |
