@@ -12,24 +12,28 @@
 </div>
 
 <table border="1">
-    <tr>
-        <th>Название</th>
-        <th>Цена (₽)</th>
-        <th>Статус</th>
-        <th>Действия</th>
-    </tr>
-    {% for w in wishes %}
-    <tr class="{% if w.status == 'completed' %}completed{% endif %}">
-        <td>{{ w.name }}</td>
-        <td>{{ w.price }} ₽</td>
-        <td>{{ '✅ Выполнено' if w.status == 'completed' else '⏳ В ожидании' }}</td>
-        <td>
-            <a href="/toggle/{{ w.id }}">🔄 Переключить</a> |
-            <a href="/edit/{{ w.id }}">✏️</a> |
-            <a href="/delete/{{ w.id }}" onclick="return confirm('Удалить?')">❌</a>
-        </td>
-    </tr>
-    {% endfor %}
+    <thead>
+        <tr>
+            <th>Название</th>
+            <th>Цена (₽)</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for w in wishes %}
+        <tr class="{% if w.status == 'completed' %}completed{% endif %}">
+            <td>{{ w.name }}</td>
+            <td>{{ w.price }} ₽</td>
+            <td>{{ '✅ Выполнено' if w.status == 'completed' else '⏳ В ожидании' }}</td>
+            <td>
+                <a href="/toggle/{{ w.id }}">🔄 Переключить</a> |
+                <a href="/edit/{{ w.id }}">✏️</a> |
+                <a href="/delete/{{ w.id }}" onclick="return confirm('Удалить?')">❌</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 
 {% if search_query %}
