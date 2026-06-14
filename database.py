@@ -1,3 +1,4 @@
+cat > database.py << 'EOF'
 import sqlite3
 import os
 
@@ -22,9 +23,11 @@ def init_db():
             status TEXT CHECK(status IN ('pending', 'completed')) DEFAULT 'pending'
         )
     ''')
-    conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                 ('Наушники Sony', 12000.0, 'https://example.com', 'pending'))
-    conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
+    conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
+                 ('Наушники Sony', 12000.0, '', 'pending'))
+    conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
                  ('Книга по Flask', 3500.0, '', 'completed'))
     conn.commit()
     conn.close()
+    print("✅ База создана с рублями!")
+EOF
