@@ -23,8 +23,8 @@ def init_db():
         conn.commit()
         # Демо-данные (цены в рублях)
         conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                     ('Наушники Sony', 12000.0, 'https://example.com', 'pending'))
+                     ('Alan Wake 2', 12000.0, 'https://example.com', 'pending'))
         conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
-                     ('Книга по Flask', 3500.0, '', 'completed'))
+                     ('Halloween: The game', 3500.0, '', 'completed'))
         conn.commit()
         conn.close()
