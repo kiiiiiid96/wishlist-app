@@ -9,10 +9,8 @@ def get_db():
     return conn
 
 def init_db():
-    # ↓↓↓ ЭТИ ДВЕ СТРОЧКИ УДАЛЯЮТ СТАРУЮ БАЗУ ДАННЫХ ↓↓↓
     if os.path.exists(DATABASE):
         os.remove(DATABASE)
-    # ↑↑↑ ЭТИ ДВЕ СТРОЧКИ УДАЛЯЮТ СТАРУЮ БАЗУ ДАННЫХ ↑↑↑
     
     conn = get_db()
     conn.execute('''
@@ -24,7 +22,6 @@ def init_db():
             status TEXT CHECK(status IN ('pending', 'completed')) DEFAULT 'pending'
         )
     ''')
-    # Демо-данные в рублях
     conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
                  ('Наушники Sony', 12000.0, 'https://example.com', 'pending'))
     conn.execute('INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)',
