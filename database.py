@@ -24,9 +24,9 @@ def init_db():
         )
     ''')
     conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
-                 ('Наушники Sony', 12000.0, '', 'pending'))
+                 ('Halloween: The Game', 1500.0, '', 'pending'))
     conn.execute("INSERT INTO wishes (name, price, link, status) VALUES (?, ?, ?, ?)",
-                 ('Книга по Flask', 3500.0, '', 'completed'))
+                 ('SILENT HILL: Townfall', 4000.0, '', 'completed'))
     conn.commit()
     conn.close()
     print("✅ База создана с рублями!")
