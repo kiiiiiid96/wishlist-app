@@ -1,3 +1,4 @@
+cat > app.py << 'EOF'
 from flask import Flask, render_template, request, redirect, url_for
 from database import init_db, get_db
 from validators import validate_wish
@@ -76,3 +77,4 @@ def search():
 if __name__ == '__main__':
     init_db()
     app.run(debug=True)
+EOF
